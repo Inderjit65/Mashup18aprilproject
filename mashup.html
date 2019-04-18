@@ -1,0 +1,63 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		#map {
+			height: 100%;
+		}
+		/* Optional: Makes the sample page fill the window. */
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+	</style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+	var map;
+	var zoom = [
+		{"zoom":"My college","coords":[30.687295,76.664411]},
+		{"zoom":"My school","coords":[31.373851,75.391890]},
+        {"zoom":"Fatehgarh sahib Punjab","coords":[30.646674,76.388756]},
+        {"zoom":"Pune India","coords":[18.525501,73.867476]},
+        {"zoom":"Austria Europe","coords":[52.488762,13.396620]},
+        {"zoom":"Edmonton Canada","coords":[53.546135,-113.491213]},
+
+		];
+
+	function initMap() {
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom: 4,
+			center: new google.maps.LatLng(44, -110),
+			mapTypeId: 'terrain'
+		});
+
+		mashParks(zoom);
+	}
+
+	function mashParks(results) {
+	for (var i = 0; i < results.length; i++) {
+		var coords = results[i].coords;
+		var latLng = new google.maps.LatLng(coords[0], coords[1]);
+		var marker = new google.maps.Marker({
+			position: latLng,
+			map: map,
+			label:results[i].park
+			});
+		}
+	}
+
+
+
+</script>
+<script async defer
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTM5RKrtCLpZAj5HU3K3cTvFNB240NsBg&callback=initMap">
+</script>
+</body>
+</html>
